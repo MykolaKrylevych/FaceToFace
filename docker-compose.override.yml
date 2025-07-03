@@ -1,0 +1,45 @@
+services:
+  doapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:14268/api/traces
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    depends_on:
+      - postgres
+      - jaeger
+
+  client:
+    ports:
+      - "5002:3000" 
+  proxy:
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf 
+    ports:
+      - "80:80"
+
+  postgres:
+    ports:
+      - "5432:5432" 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+
+  jaeger:
+    ports:
+      - "16686:16686" # UI
+      - "6831:6831/udp" # agent (UDP)
+      - "14268:14268" # collector HTTP API
+volumes:
+  postgres_data:
+    

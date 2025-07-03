@@ -1,0 +1,28 @@
+services:
+  doapi:
+    image: ${DOCKER_REGISTRY-}doapi
+    build:
+      context: .
+      dockerfile: DoApi/Dockerfile
+
+  client:
+    image: client
+    build:
+        context: ./frontend-react
+        dockerfile: Dockerfile
+  
+  proxy:
+    image: nginx:mainline
+
+  postgres:
+    image: postgres:17
+      
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+
+  DoApi.papercut:
+    image: changemakerstudiosus/papercut-smtp:latest
+    container_name: papercut_smtp
+    ports:
+      - "8080:80"
+      - "25:25"
