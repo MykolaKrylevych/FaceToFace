@@ -1,0 +1,126 @@
+Стилі для Mission картки
+
+className="relative z-10 w-full bg-white dark:bg-gray-800 rounded-3xl border border-zinc-700 p-12 text-center space-y-8 cursor-grab active:cursor-grabbing text-slate-300 before:absolute before:inset-0 before:-z-10 before:rounded-[1.5rem] before:bg-[conic-gradient(var(--tw-gradient-stops))] before:from-sky-600 before:via-sky-600 before:to-cyan-600 before:opacity-50 before:blur-2xl"
+
+
+className="bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-teal-600 via-fuchsia-600 to-red-600 relative z-10 w-full bg-white dark:bg-gray-800 rounded-3xl border border-zinc-700 p-12 text-center space-y-8 cursor-grab active:cursor-grabbing text-slate-300"
+
+
+className="relative z-10 w-full overflow-hidden rounded-3xl border border-zinc-700 p-10 sm:p-12 text-center space-y-8 bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur-md shadow-xl text-slate-800 dark:text-slate-300 cursor-grab active:cursor-grabbing before:absolute before:inset-0 before:-z-10 before:rounded-[1.5rem] before:bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] before:from-teal-500 before:via-fuchsia-500 before:to-red-500 before:opacity-40 before:blur-3xl transition-transform duration-300 ease-out hover:scale-[1.01]"
+
+
+className="
+  relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+  bg-white/10 dark:bg-black/40 backdrop-blur-lg border-2 border-gradient-to-r from-teal-400 via-purple-500 to-pink-500
+  text-white
+  hover:scale-[1.02] transition-transform duration-200
+"
+
+
+className="
+  relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+  bg-gray-800 text-slate-300
+  shadow-[0_0_15px_5px_rgba(14,165,233,0.4)]
+  hover:shadow-[0_0_25px_8px_rgba(14,165,233,0.7)]
+  transition-shadow duration-300 ease-in-out
+"
+
+className="
+  relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+  bg-gradient-to-r from-teal-500 via-purple-600 to-pink-500
+  border border-white/30
+  text-white shadow-lg
+  hover:brightness-110 transition
+"
+
+
+Тонка рамка + внутрішній глоу
+          className="
+  relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+  bg-zinc-900 text-slate-300
+  border border-zinc-600
+  shadow-inner shadow-cyan-600/30
+  hover:shadow-cyan-500/60 transition-shadow duration-300
+"
+
+
+Інвертована рамка з градієнтом та легким світлом
+
+className="
+  relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+  bg-white dark:bg-gray-800 text-gray-900 dark:text-slate-300
+  border-2 border-transparent
+  before:absolute before:-inset-1 before:rounded-3xl
+  before:bg-gradient-to-r before:from-rose-400 before:via-fuchsia-500 before:to-indigo-600
+  before:opacity-60 before:blur-sm before:z-[-1]
+  hover:before:opacity-90 transition-opacity duration-300
+"
+
+
+Рамка-градієнт із "розмитим" світлом
+
+className="
+  relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+  bg-zinc-900 text-slate-300 border border-transparent
+  before:absolute before:-inset-2 before:rounded-3xl
+  before:bg-gradient-to-r before:from-cyan-400 before:via-blue-500 before:to-purple-600
+  before:blur-xl before:opacity-70 before:z-[-1]
+"
+
+
+className="
+  relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+  bg-zinc-900 text-slate-300
+  border border-zinc-700
+  shadow-inner shadow-gradient-to-r shadow-cyan-400/50 shadow-purple-500/40
+  hover:scale-[1.03] transition-transform duration-300 ease-in-out
+"
+
+
+className="
+  relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+  bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-800 text-white
+  border border-transparent
+  shadow-inner shadow-white/10
+  hover:shadow-inner hover:shadow-cyan-400/50 transition-shadow duration-300 ease-in-out
+"
+
+
+className="
+  relative z-10 w-full rounded-xl p-10 text-center space-y-6 cursor-grab active:cursor-grabbing
+  bg-white dark:bg-gray-900
+  border border-gray-200 dark:border-gray-600
+  text-gray-800 dark:text-gray-300
+  shadow-sm
+  hover:shadow-lg dark:hover:shadow-blue-700/60
+  transition-shadow duration-300 ease-in-out
+"
+
+
+className="
+  relative z-10 w-full rounded-lg p-12 text-center space-y-6 cursor-grab active:cursor-grabbing
+  bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm
+  border border-gray-300 dark:border-gray-600
+  text-gray-900 dark:text-gray-100
+  shadow-md
+  transition-transform transition-shadow duration-300 ease-in-out
+  hover:shadow-xl hover:scale-[1.02]
+"
+
+className="
+  relative z-10 w-full rounded-2xl p-12 text-center space-y-6 cursor-grab active:cursor-grabbing
+  bg-white dark:bg-gray-900
+  border border-gray-100 dark:border-gray-800
+  text-gray-700 dark:text-gray-300
+  shadow-[0_1px_3px_rgba(0,0,0,0.05)]
+  transition-shadow duration-300 ease-in-out
+  hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:scale-[1.005]
+"
+
+
+
+ className="
+      relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+      bg-white/10 dark:bg-black/40 backdrop-blur-lg border border-white/20
+      text-white transition-transform duration-200 hover:scale-[1.02]
+    "
