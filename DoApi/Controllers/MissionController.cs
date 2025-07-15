@@ -44,6 +44,12 @@ namespace DoApi.Controllers
         {
             return await _db.Missions.OrderBy(x => Guid.NewGuid()).Where(p=>p.Status == MissionApprovementStatusEnum.approved).Take(1).ToListAsync();
         }
+        
+        [HttpGet("pending")]
+        public async Task<List<Mission>> ToApprove()
+        {
+            return await _db.Missions.OrderBy(x => Guid.NewGuid()).Where(p=>p.Status == MissionApprovementStatusEnum.pending).Take(1).ToListAsync();
+        }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
@@ -72,8 +78,8 @@ namespace DoApi.Controllers
         }
         
         [Authorize(Policy = "EmailVerified")]
-        [HttpPatch("approve/{id}")]
-        public async Task<IActionResult> Approve(int id, [FromBody] MissionPatchDto dto)
+        [HttpPatch("status/{id}")]
+        public async Task<IActionResult> Status(int id, [FromBody] MissionPatchDto dto)
         {
             var mission = await _db.Missions.FindAsync(id);  
 

@@ -13,10 +13,10 @@ namespace DoApi.Users
         {
             User? user = await context.Users.GetByEmail(request.Email);
 
-            //if (user is null || !user.EmailVerified)
-            //{
-            //    throw new Exception("The user was not found");
-            //}
+            if (user is null || !user.EmailVerified)
+            {
+                throw new Exception("The user was not found");
+            }
 
             bool verified = passwordHasher.Verify(request.Password, user.PasswordHash);
 
