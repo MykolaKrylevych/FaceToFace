@@ -15,6 +15,9 @@ using System.Text;
 using DoApi.Users;
 using System.Net.Mail;
 using System.Net;
+using DoApi.Services;
+using DoApi.Repositories;
+using DoApi.Logging;
 
 namespace DoApi.Initializers
 {
@@ -73,6 +76,10 @@ namespace DoApi.Initializers
             //{
             //    cfg.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
             //}).CreateMapper());
+            services.AddScoped<IMissionService, MissionService>();
+            services.AddScoped<IMissionRepository, MissionRepository>();
+            services.AddScoped(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
+
 
             services.AddScoped<RegisterUser>();
             services.AddScoped<LoginUser>();
