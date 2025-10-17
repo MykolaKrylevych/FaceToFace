@@ -12,3 +12,10 @@
 Face-To-Face app is a free online game writen in C#, asp.net core and react 
 
 ![image](https://github.com/user-attachments/assets/d77f5537-1a0e-4e46-be5d-38f73ce47098)
+<img width="675" height="629" alt="image" src="https://github.com/user-attachments/assets/ecdbe1e5-146f-4b21-a06d-c5ab06fdf141" />
+<img width="928" height="642" alt="image" src="https://github.com/user-attachments/assets/f5814d42-7c66-4cfb-940c-6568a4f80a88" />
+<img width="1908" height="836" alt="image" src="https://github.com/user-attachments/assets/e3579050-67b9-4dd1-893a-6ec4f965c25b" />
+<img width="1893" height="847" alt="image" src="https://github.com/user-attachments/assets/9ee75aa9-9a56-4df1-88cc-50faa919d46c" />
+<img width="1881" height="855" alt="image" src="https://github.com/user-attachments/assets/e5373185-c008-4a92-a48a-560a3dee7d40" />
+
+
