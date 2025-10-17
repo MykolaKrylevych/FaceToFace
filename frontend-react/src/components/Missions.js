@@ -4,6 +4,7 @@ import ModalForm from './ModalForm';
 import { ArrowRightLeft } from 'lucide-react';
 import Logo from './Logo';
 import FaceToFaceLogo from './LogoUa';
+import Card from './DeepTalk/Card';
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
@@ -122,6 +123,7 @@ const Missions = () => {
             </motion.p>
               
             </div>
+            
           </motion.div>
         </div>
       ))}
@@ -134,6 +136,8 @@ const Missions = () => {
     }
     `}  
     </style> 
+
+
     </div>
   );
 };

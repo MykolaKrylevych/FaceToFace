@@ -16,6 +16,7 @@ import DashboardTab from './DashboardTab';
 import SettingsTab from './SettingsTab';
 import ApproveTab from './ApproveTab';
 import md5 from 'blueimp-md5';
+import SwipeDeck from './Dilemma/SwipeDeck';
 
 export default function AdminDashboard() {
   
