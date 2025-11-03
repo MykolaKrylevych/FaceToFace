@@ -42,9 +42,11 @@ namespace DoApi.Controllers
 
         // approved only missions 
         [HttpGet("random")]
-        public async Task<List<Mission>> Random(MissionApprovementStatusEnum status = MissionApprovementStatusEnum.approved, int amount = 1)
+        public async Task<List<Mission>> Random(MissionApprovementStatusEnum status = MissionApprovementStatusEnum.approved , int amount = 1)
         {
-            return await _missionService.GetRandomMissionByStatus(status , amount);
+            
+
+            return await _missionService.GetRandomMissionByStatus(status, amount);
             // get random mission from db by status 
             //return await _db.Missions.OrderBy(x => Guid.NewGuid()).Where(p=>p.Status == MissionApprovementStatusEnum.approved).Take(1).ToListAsync();
         }

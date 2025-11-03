@@ -151,7 +151,7 @@ export default function AdminDashboard() {
 </header>
 
         {/* <main className="flex-1 p-6 space-y-6 overflow-auto"> */}
-         <AnimatePresence mode="wait">
+  <AnimatePresence mode="wait">
   {tab === 'dashboard' && (
     <motion.div
       key="dashboard"

@@ -94,13 +94,13 @@ namespace DoApi.Services
 
         }
 
-        public Task<List<Mission>> GetRandomMissionByStatus(MissionApprovementStatusEnum status, int amount)
+        public async Task<List<Mission>> GetRandomMissionByStatus(MissionApprovementStatusEnum status, int amount)
         {
             _logger.LogInformation($"Retrieving {amount} random missions");
             var stopWatch = Stopwatch.StartNew();
             try
             {
-                return _missionRepository.GetRandomMissionByStatus(status, amount);
+                return await _missionRepository.GetRandomMissionByStatus(status, amount);
             }
             catch (Exception e)
             {

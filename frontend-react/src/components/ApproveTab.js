@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { Check, Trash, PencilLine } from 'lucide-react';
+import { Check, Trash, PencilLine, ArrowLeft, ArrowRight, ArrowDown } from 'lucide-react';
 
 export default function ApproveTab() {
   const controls = useAnimation();
@@ -118,92 +118,80 @@ export default function ApproveTab() {
 
 
   
-  return (
-        
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 dark:bg-gray-900 p-10 bg-noise">
-      
-      {missions.map((mission, index) => (
-        <div key={index} className="relative w-full max-w-4xl my-20">
-  {/* Іконка "Затвердити" — зліва поза карткою */}
-  <div className="absolute left-[-60px] top-1/2 -translate-y-1/2 z-20">
-    <Check
-      size={36}
-      className="text-green-500 hover:text-green-400 transition"
-      
-    />
-  </div>
+return (
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 dark:bg-gray-900 p-10 relative overflow-hidden">
+      {/* Підказки свайпів */}
+      <div className="absolute inset-0 pointer-events-none flex justify-between items-center px-10">
+        <div className="flex flex-col items-center space-y-2 opacity-70">
+          <ArrowLeft size={40} className="text-green-500 animate-pulse" />
+          <Check size={36} className="text-green-500" />
+          <p className="text-sm text-green-600 font-semibold">Approve</p>
+        </div>
 
-  {/* Іконка "Видалити" — справа поза карткою */}
-  <div className="absolute right-[-60px] top-1/2 -translate-y-1/2 z-20">
-    <Trash
-      size={36}
-      className="text-red-500 hover:text-red-400 transition"
-      
-    />
-  </div>
+        <div className="flex flex-col items-center space-y-2 opacity-70">
+          <ArrowRight size={40} className="text-red-500 animate-pulse" />
+          <Trash size={36} className="text-red-500" />
+          <p className="text-sm text-red-600 font-semibold">Delete</p>
+        </div>
+      </div>
 
-  {/* Іконка "Нотатка" — знизу поза карткою */}
-  <div className="absolute bottom-[-60px] left-1/2 -translate-x-1/2 z-20">
-    <PencilLine
-      size={36}
-      className="text-yellow-500 hover:text-yellow-400 transition"
-      
-    />
-  </div>
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-70">
+        <ArrowDown size={40} className="text-yellow-400 animate-pulse" />
+        <PencilLine size={36} className="text-yellow-400" />
+        <p className="text-sm text-yellow-500 font-semibold">Draft</p>
+      </div>
 
-  {/* Motion картка з місією */}
-  <motion.div
-    drag="x"
-    dragConstraints={{ left: 0, right: 0 }}
-    dragElastic={0.2}
-    onDragEnd={(e, info) => handleDragEnd(e, info, mission.id)}
-    animate={controls}
-    initial={{ opacity: 0, y: 20 }}
-    className="
-      relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
-      bg-white/10 dark:bg-black/40 backdrop-blur-lg border-2 border-gradient-to-r from-teal-400 via-purple-500 to-pink-500
-      text-white hover:scale-[1.02] transition-shadow duration-300 ease-in-out
-    "
-  >
-    <div className="flex justify-center mb-6">
-      <img
-        src={`data:image/svg+xml;base64,${mission.image}`}
-        width={48}
-        height={48}
-        alt="mission"
-      />
-    </div>
+    {/* Основний контент */}
+    {missions.map((mission, index) => (
+      <div key={index} className="relative w-full max-w-4xl my-20">
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragEnd={(e, info) => handleDragEnd(e, info, mission.id)}
+          animate={controls}
+          initial={{ opacity: 0, y: 20 }}
+          className="
+            relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
+            bg-white/10 dark:bg-black/40 backdrop-blur-lg border-2 border-gradient-to-r from-teal-400 via-purple-500 to-pink-500
+            text-white hover:scale-[1.02] transition-shadow duration-300 ease-in-out
+          "
+        >
+          <div className="flex justify-center mb-6">
+            <img
+              src={`data:image/svg+xml;base64,${mission.image}`}
+              width={48}
+              height={48}
+              alt="mission"
+            />
+          </div>
 
-    <div className="space-y-3">
-      <h3 className="font-semibold text-3xl font-poppins text-gray-900 dark:text-white">
-        {mission.question}
-        
-      </h3>
+          <div className="space-y-3">
+            <h3 className="font-semibold text-3xl font-poppins text-gray-900 dark:text-white">
+              {mission.question}
+            </h3>
 
-      <motion.p
-        initial={{ clipPath: 'inset(0% 100% 0% 0%)' }}
-        animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
-        transition={{ duration: 1, ease: 'easeInOut' }}
-        className="text-lg text-gray-600 dark:text-gray-300 animate-pulse"
-      >
-        {mission.missionType || 'Опис місії недоступний.'}
-        {mission.id || 'id'}
-      </motion.p>
-    </div>
-  </motion.div>
+            <motion.p
+              initial={{ clipPath: 'inset(0% 100% 0% 0%)' }}
+              animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+              transition={{ duration: 1, ease: 'easeInOut' }}
+              className="text-lg text-gray-600 dark:text-gray-300 animate-pulse"
+            >
+              {mission.missionType || 'Опис місії недоступний.'}
+            </motion.p>
+          </div>
+        </motion.div>
+      </div>
+    ))}
 
-</div>
-
-      ))}
-      
     <style jsx>
-    {`
-    .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle fill='%23fff' fill-opacity='0.03' cx='1' cy='1' r='1'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    }
-    `}  
-    </style> 
-    </div>
-  );
+      {`
+        .bg-noise {
+          background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle fill='%23fff' fill-opacity='0.03' cx='1' cy='1' r='1'/%3E%3C/svg%3E");
+          background-repeat: repeat;
+        }
+      `}
+    </style>
+  </div>
+);
 };
