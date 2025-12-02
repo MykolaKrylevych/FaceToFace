@@ -16,7 +16,7 @@ using Application.Mappers;
 
 namespace DoApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class MissionController : ControllerBase
     {

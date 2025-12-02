@@ -1,28 +1,94 @@
-services:
+﻿services:
   doapi:
     image: ${DOCKER_REGISTRY-}doapi
     build:
       context: .
       dockerfile: DoApi/Dockerfile
+    networks:
+      - webnet
+
 
   client:
     image: client
     build:
         context: ./frontend-react
         dockerfile: Dockerfile
+    networks:
+      - webnet
   
   proxy:
-    image: nginx:mainline
+    image: nginx:latest
+    container_name: nginx_proxy
+    restart: unless-stopped
+    depends_on:
+      - doapi
+      - client
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./letsencrypt:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - webnet
+  
+  certbot-init:
+    image: certbot/certbot
+    container_name: certbot_init
+    depends_on:
+      - proxy
+    command: >
+      certonly --webroot --webroot-path=/var/www/certbot
+      --email ${EMAIL_ADDRESS}
+      -d ${DOMAIN_NAME}
+      --agree-tos
+      --no-eff-email
+      --non-interactive
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - webnet
 
+  certbot-renew:
+    image: certbot/certbot
+    container_name: certbot_renew
+    restart: unless-stopped
+    entrypoint: >
+      sh -c "while :; do
+      certbot renew --webroot --webroot-path=/var/www/certbot;
+      nginx -s reload;
+      sleep 12h;
+      done"
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - webnet
   postgres:
     image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - webnet
       
   jaeger:
     image: jaegertracing/all-in-one:latest
-
-  DoApi.papercut:
-    image: changemakerstudiosus/papercut-smtp:latest
-    container_name: papercut_smtp
     ports:
-      - "8080:80"
-      - "25:25"
+      - "16686:16686"
+    networks:
+      - webnet
+
+
+volumes:
+  pgdata:
+
+networks:
+  webnet:
+

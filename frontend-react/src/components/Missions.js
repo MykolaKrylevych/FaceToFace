@@ -19,7 +19,7 @@ const Missions = () => {
 
 
   useEffect(() => {
-    fetch('https://localhost:5001/api/Mission/random') // doapi:8081
+    fetch('http://localhost/api/Mission/random') // doapi:8081 https://localhost:5001/api/Mission/random
       .then((res) => res.json())
       .then((data) => {
         setMissions(data);
