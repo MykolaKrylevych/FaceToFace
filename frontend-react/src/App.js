@@ -8,7 +8,7 @@ import PrivateRoute from './components/PrivateRoute';
 import ApproveTab from './components/ApproveTab';
 import LandingPage from './components/Home/LandingPage';
 import SwipeDeck from './components/Dilemma/SwipeDeck';
-// import Dashboard from './components/testcode/Dashboard';
+import Dashboard from './components/testcode/Dashboard';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/app" element={<Missions/>} />
           <Route path="/dilema" element={<SwipeDeck/>}/>
-          <Route path="/test" element={<ApproveTab/>}/>
+          <Route path="/test" element={<Dashboard/>}/>
           <Route path="/login" element={<LoginPage/>} />
           <Route path="/" element={<LandingPage/>}/>
           <Route
