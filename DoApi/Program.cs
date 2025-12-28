@@ -46,7 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.ConfigureMiddleware();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
 

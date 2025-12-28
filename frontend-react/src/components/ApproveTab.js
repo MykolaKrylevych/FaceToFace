@@ -10,7 +10,7 @@ export default function ApproveTab() {
   const token = sessionStorage.getItem('token');
 
   useEffect(() => {
-    fetch('https://localhost:5001/api/Mission/pending') // doapi:8081
+    fetch('https://localhost/api/Mission/pending') // doapi:8081
       .then((res) => res.json())
       .then((data) => {
         setMissions(data);
@@ -33,13 +33,13 @@ export default function ApproveTab() {
     let payload = {};
 
     if (action === 'approve') {
-      url = `https://localhost:5001/api/Mission/status/${missionId}`;
+      url = `https://localhost/api/Mission/status/${missionId}`;
       payload = { status: 'approved' };
     } else if (action === 'reject') {
-      url = `https://localhost:5001/api/Mission/${missionId}`;
+      url = `https://localhost/api/Mission/${missionId}`;
       method = 'DELETE';
     } else if (action === 'draft') {
-      url = `https://localhost:5001/api/Mission/status/${missionId}`;
+      url = `https://localhost/api/Mission/status/${missionId}`;
       payload = { status: 'draft' };
     } else {
       return;

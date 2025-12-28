@@ -17,56 +17,36 @@
       - webnet
   
   proxy:
-    image: nginx:latest
+    image: nginx:stable-alpine
     container_name: nginx_proxy
     restart: unless-stopped
     depends_on:
-      - doapi
+      - doapi   
       - client
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./letsencrypt:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    networks:
-      - webnet
-  
-  certbot-init:
-    image: certbot/certbot
-    container_name: certbot_init
-    depends_on:
-      - proxy
-    command: >
-      certonly --webroot --webroot-path=/var/www/certbot
-      --email ${EMAIL_ADDRESS}
-      -d ${DOMAIN_NAME}
-      --agree-tos
-      --no-eff-email
-      --non-interactive
-    volumes:
-      - ./letsencrypt:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/
+      - ./frontend-react/build:/usr/share/nginx/html
     networks:
       - webnet
 
-  certbot-renew:
+
+  
+  certbot:
     image: certbot/certbot
-    container_name: certbot_renew
-    restart: unless-stopped
-    entrypoint: >
-      sh -c "while :; do
-      certbot renew --webroot --webroot-path=/var/www/certbot;
-      nginx -s reload;
-      sleep 12h;
-      done"
+    container_name: certbot
     volumes:
-      - ./letsencrypt:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-      - /var/run/docker.sock:/var/run/docker.sock
+        - ./certbot/conf:/etc/letsencrypt
+        - ./certbot/www:/var/www/certbot 
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email {Email} -d {DOMAIN_NAME} --agree-tos
     networks:
       - webnet
+
+
   postgres:
     image: postgres:17
     environment:

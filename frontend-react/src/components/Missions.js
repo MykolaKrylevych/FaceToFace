@@ -28,6 +28,9 @@ const Missions = () => {
     }
   };
 
+
+
+  
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center bg-gray-50 dark:bg-gray-900 p-10">
