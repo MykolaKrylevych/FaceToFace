@@ -87,6 +87,8 @@ const LandingPage = () => {
           Manage
         </a>
 
+
+
         {/* Footer */}
         <footer className="text-sm text-gray-400/70">
           © {new Date().getFullYear()} Card Swipe App.
