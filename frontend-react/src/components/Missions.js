@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRightLeft } from 'lucide-react';
-
 import ModalForm from './ModalForm';
 import FaceToFaceLogo from './LogoUa';
 
-const swipeConfidenceThreshold = 100;
+const swipeThreshold = 100;
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [direction, setDirection] = useState(0);
 
   useEffect(() => {
     fetch('/api/Mission/random')
@@ -22,7 +22,8 @@ const Missions = () => {
   }, []);
 
   const handleSwipe = (offsetX, index) => {
-    if (Math.abs(offsetX) > swipeConfidenceThreshold) {
+    if (Math.abs(offsetX) > swipeThreshold) {
+      setDirection(offsetX > 0 ? 1 : -1);
       setMissions(prev => prev.filter((_, i) => i !== index));
     }
   };
@@ -42,22 +43,21 @@ const Missions = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-10 bg-noise">
-      
       <div className="w-[320px] mb-8">
         <FaceToFaceLogo />
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence custom={direction}>
         {missions.map((mission, index) => (
           <motion.div
             key={mission.id || index}
-            className="relative w-full max-w-4xl my-6"
+            custom={direction}
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 300, scale: 0.9 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            exit={dir => ({ x: dir > 0 ? 400 : -400, opacity: 0, rotate: dir * 8 })}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="relative w-full max-w-4xl my-6"
           >
-            {/* glow */}
             <div className="absolute -inset-4 rounded-3xl bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-rose-300 via-purple-200 to-indigo-300 opacity-30 blur-2xl pointer-events-none" />
 
             <motion.div
@@ -65,12 +65,7 @@ const Missions = () => {
               dragElastic={0.25}
               dragConstraints={{ left: -300, right: 300 }}
               onDragEnd={(e, info) => handleSwipe(info.offset.x, index)}
-              className="
-                relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing
-                bg-white/10 dark:bg-black/40 backdrop-blur-lg
-                border border-white/20
-                hover:scale-[1.02] transition-transform
-              "
+              className="relative z-10 w-full rounded-3xl p-12 text-center space-y-8 cursor-grab active:cursor-grabbing bg-white/10 dark:bg-black/40 backdrop-blur-lg border border-white/20 hover:scale-[1.02] transition-transform"
             >
               <div className="absolute top-4 right-4 text-gray-700 dark:text-gray-200">
                 <ArrowRightLeft size={22} />
@@ -97,7 +92,6 @@ const Missions = () => {
               >
                 {mission.missionType || 'Опис місії недоступний.'}
               </motion.p>
-
             </motion.div>
           </motion.div>
         ))}
@@ -111,7 +105,6 @@ const Missions = () => {
           background-repeat: repeat;
         }
       `}</style>
-
     </div>
   );
 };
