@@ -4,7 +4,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:14268/api/traces
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
     ports:
       - "5000:8080"
       - "5001:8081"
@@ -41,9 +41,9 @@ services:
 
   jaeger:
     ports:
-      - "16686:16686" # UI
-      - "6831:6831/udp" # agent (UDP)
-      - "14268:14268" # collector HTTP API
+      - "4317:4317" 
+      - "4318:4318" 
+      - "16686:16686" 
 volumes:
   postgres_data:
     

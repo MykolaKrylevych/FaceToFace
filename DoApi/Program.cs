@@ -15,7 +15,7 @@ builder.Services.ConfigureEmail(builder.Configuration);
 builder.Services.ConfigureServices(builder.Configuration);
 builder.Services.RegisterSwagger();
 
-//builder.Services.AddOpenTelenetryAndJaeger();
+builder.Services.AddOpenTelenetryAndJaeger();
 
 
 //var startup = new Startup(builder.Configuration);

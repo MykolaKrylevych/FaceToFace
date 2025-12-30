@@ -34,11 +34,11 @@ namespace DoApi.Initializers
 
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddCors(options => options.AddPolicy("CorsPolicy", builder => 
-            {
-                builder.WithOrigins("http://localhost:3000");
-            }
-            ));
+            //services.AddCors(options => options.AddPolicy("CorsPolicy", builder => 
+            //{
+            //    builder.WithOrigins("http://localhost:3000");
+            //}
+            //));
             services.AddControllers();
             
             
@@ -91,18 +91,19 @@ namespace DoApi.Initializers
 
         public static IServiceCollection AddOpenTelenetryAndJaeger(this IServiceCollection services)
         {
-            services.AddOpenTelemetry().WithTracing(tracerProviderBuilder =>
+            services
+                .AddOpenTelemetry()
+                .ConfigureResource(resource => resource.AddService("DoApi"))
+                .WithTracing(tracerProviderBuilder =>
             {
                 tracerProviderBuilder
                     .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("DoApi"))
                     .AddAspNetCoreInstrumentation()
-                    .AddHttpClientInstrumentation()
-                    .AddOtlpExporter(otlpOptions =>
-                    {
-                        // change it if u use docker 
-                        otlpOptions.Endpoint = new Uri("http://localhost:14268/api/traces");
-                    });
-                // add Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? "http://localhost:14268/api/traces" later 
+                    .AddHttpClientInstrumentation();
+
+
+
+                tracerProviderBuilder.AddOtlpExporter();
             });
 
 
