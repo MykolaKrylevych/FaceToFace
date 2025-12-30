@@ -29,7 +29,7 @@ const ModalForm = () => {
     };
 
     try {
-      const response = await fetch('https://localhost:5001/api/Mission', {
+      const response = await fetch('/api/Mission', {
         method: 'POST',
         headers: {
           'Accept': 'text/plain',
