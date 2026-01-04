@@ -47,7 +47,6 @@ const Missions = () => {
       setCurrentIndex(0); // reset index to show new cards
     } catch (err) {
       console.error('Failed to fetch missions', err);
-      window.location.reload(); // fallback: reload page
     }
   };
 

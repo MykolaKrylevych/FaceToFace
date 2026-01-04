@@ -6,6 +6,10 @@
       dockerfile: DoApi/Dockerfile
     networks:
       - webnet
+    environment:
+        - Jwt__Secret=your_super_secret_key)
+        - Email__Username=your_email_for_sending
+        - Email__Secret=your_email_password_for_sending
 
 
         
